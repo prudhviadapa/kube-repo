@@ -1,8 +1,28 @@
-sudo: true
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - IMAGE_NAME=prudhviadapa/docker-img
+    - REGISTRY_USER=prudhviadapa
+    - REGISTRY_PASS=a9948646866
+      #secret: "<something long>"
 
 before_script:
-        - docker info
-build_image:
-   script:
-       - docker build -t my-docker-image1 .
-             
+  - version="$(awk '$2 == "docker-img-version" { print $3; exit }' Dockerfile)"
+  - docker pull "$IMAGE_NAME" || true
+script:
+  - docker build --pull --cache-from "$IMAGE_NAME" --tag "$IMAGE_NAME" .
+
+after_script:
+  - docker images
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
+  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:${version}"
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest" && docker push "${IMAGE_NAME}:${version}"
+  on:
+    branch: dev
