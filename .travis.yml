@@ -1,9 +1,28 @@
 sudo: required
 services:
   - docker
-env:
-   global:
-        - DOCKER_IMAGE=dev
-        - TRAVIS_COMMIT=v1  
-before_install:
-         - docker build -t $DOCKER_IMAGE:$TRAVIS_COMMIT .
+    #env:
+    #global:
+    #- IMAGE_NAME=acme-corp/cake-service
+    #- REGISTRY_USER=myrobot
+    # REGISTRYi_PASS=...
+    #- secret: "<something long>"
+
+    #before_script:
+    #- version="$(awk '$2 == "CAKE_SERVICE_VERSION" { print $3; exit }' Dockerfile)"
+    #- docker pull "$IMAGE_NAME" || true
+script:
+        - docker build -t image-1:v1 .
+
+after_script:
+  - docker images
+
+    #before_deploy:
+    #- docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+    #- docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
+    #- docker tag "$IMAGE_NAME" "${IMAGE_NAME}:${version}"
+    #deploy:
+    #provider: script
+    #script: docker push "${IMAGE_NAME}:latest" && docker push "${IMAGE_NAME}:${version}"
+  on:
+    branch: dev
