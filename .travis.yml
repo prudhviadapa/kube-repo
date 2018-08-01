@@ -1,5 +1,9 @@
 sudo: required
 services:
   - docker
+env:
+   global:
+        - DOCKER_IMAGE=dev
+        - TRAVIS_COMMIT=v1  
 before_install:
          - docker build -t $DOCKER_IMAGE:$TRAVIS_COMMIT .
