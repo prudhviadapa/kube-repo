@@ -8,3 +8,5 @@ services:
 before_install:
         - docker build -t prudhviadapa/kube-repo .
         - docker ps -a
+on:
+  branch: dev
