@@ -8,5 +8,7 @@ services:
 before_install:
         - docker build -t prudhviadapa/kube-repo:v1 .
         - docker ps -a
-on:
-  branch: dev
+          #on:
+          #branch: dev
+script:
+      - bundle exec rake test
