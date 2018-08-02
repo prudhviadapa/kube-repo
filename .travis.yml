@@ -1,9 +1,10 @@
 sudo: required
+
+language: ruby
+
 services:
   - docker
 
-script:
-      - docker build -t dev:v1 .
-
-on:
-    branch: dev
+before_install:
+        - docker build -t prudhviadapa/kube-repo .
+        - docker ps -a
