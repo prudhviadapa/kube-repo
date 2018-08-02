@@ -3,4 +3,4 @@ steps:
   args: ['clone', 'https://github.com/prudhviadapa/kube-repo.git']
   #env: ['PROJECT_ROOT=hello']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/my-project-id/myimage', '.']
+  args: ['build', '-t', 'gcr.io/projectkube-211818/myimage', '.']
