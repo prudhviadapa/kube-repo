@@ -1,0 +1,32 @@
+---
+apiVersion: app/v1
+kind: Deployment
+metadata:
+  name: version-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        revision: "{{CF_REVISION}}"
+      labels:
+        app: version-v1
+    spec:
+      containers:
+        - name: version-v1
+          image: tallapaneni/versions:{{CF_BRANCH}}_{{CF_REVISION}}
+          ports:
+            - containerPort: 80
+              name: http
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-v1
+spec:
+  selector:
+    app: nginx-v1
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
