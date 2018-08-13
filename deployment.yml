@@ -3,6 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: version-v1
+  labels:
+        app: version-v1
 spec:
   replicas: 1
   template:
