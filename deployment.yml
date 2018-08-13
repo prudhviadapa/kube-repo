@@ -7,6 +7,9 @@ metadata:
         app: version-v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-v2
   template:
     metadata:
       annotations:
