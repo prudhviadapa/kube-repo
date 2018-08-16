@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "docker build . -t jf:${GIT_REVISION,length=6}"
+                sh "docker build . -t jf:${GIT_COMMIT,length=6}"
                 echo 'BUILDED IMAGE SUCCESSFULLY USING DOCKER FILE'
 	   }
         }
