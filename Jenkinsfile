@@ -4,9 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "docker build -t gcr.io/projectkube-211818/github-prudhviadapa-kube-repo:${env.BUILD_TAG} ."
+                sh "docker build -t gcr.io/projectkube-211818/github-prudhviadapa-kube-repo:${env.COMMIT_SHA} ."
                 echo 'Image build success'
-		sh "docker push gcr.io/projectkube-211818/github-prudhviadapa-kube-repo:${env.BUILD_TAG}"
+		sh "docker push gcr.io/projectkube-211818/github-prudhviadapa-kube-repo:${env.COMMIT_SHA}"
 		echo 'Pushed to gcr successfully'
 	   }
         }
