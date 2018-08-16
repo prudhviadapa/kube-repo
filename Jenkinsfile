@@ -4,8 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
-            }
+                sh "docker build . -t jf:${GIT_REVISION,length=6}"
+                echo 'BUILDED IMAGE SUCCESSFULLY USING DOCKER FILE'
+	   }
         }
         stage('Test') {
             steps {
