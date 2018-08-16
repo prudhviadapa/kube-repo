@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "docker build -t prudhviadapa/rambo:jf ."
+                sh "docker build -t prudhviadapa/rambo:${env.GIT_BRANCH} ."
                 echo 'BUILDED IMAGE SUCCESSFULLY USING DOCKER FILE'
 	   }
         }
