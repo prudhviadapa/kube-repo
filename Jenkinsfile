@@ -1,12 +1,16 @@
 pipeline {
     agent any
 
-    environment {
-          
-	  sh 'git rev-parse HEAD > GIT_COMMIT'
-          def shortCommit = readFile('GIT_COMMIT').take(6)
-          echo '$'
-    }
+  node {
+      checkout scm
+ 
+      sh 'git rev-parse HEAD > GIT_COMMIT'
+      def shortCommit = readFile('GIT_COMMIT').take(6)
+      def image = docker.build(gcr.io/projectkube-211818/github-prudhviadapa-kube-repo-${shortCommit})")
+ 
+   stage 'Build'
+   image.push()
+}
 
     stages {
         stage('Build') {
