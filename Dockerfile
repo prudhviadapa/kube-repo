@@ -1,4 +1,4 @@
 FROM nginx:latest
-   MAINTAINER prudhviadapa
-   COPY index.html /usr/share/nginx/html/
-   EXPOSE 80
+MAINTAINER prudhviadap
+COPY index.html /usr/share/nginx/html/
+EXPOSE 80
